@@ -3,13 +3,53 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const logger = require("morgan");
 
-insert_hub('KMCI', 'Kansas City');
+var poc_list = get_poc(populate_poc_list);
 
-function get_poc(){
-
-
-  return poc_list;
+function print_poc_list(){
+  console.log(poc_list);
 }
+
+function populate_poc_list(list){
+  var poc = []
+  for(i = 0; i < list.length; i++){
+    poc.push(list[i]);
+  }
+
+  return poc;
+}
+
+function get_poc(callback){
+  var poc = [];
+
+  let db = new sqlite3.Database('./data/wide.db', sqlite3.OPEN_READWRITE, (err) => {
+    if (err) {
+      return console.error(err.message);
+    }
+    console.log('Connected to the WIDE SQlite database to get POCs.');
+  });
+
+  let sql = 'SELECT * FROM poc';
+
+  db.all(sql, (err, rows) => {
+    if (err) {
+      return console.error(err.message);
+    }
+    return callback(rows);
+
+
+  });
+
+  db.close((err) => {
+    if (err) {
+      return console.error(err.message);
+    }
+    console.log('Closed the database connection.');
+  });
+
+}
+
+
+
 
 function insert_hub(site_name, site_city){
 
