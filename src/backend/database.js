@@ -1,17 +1,17 @@
-const sqlite3 = require('sqlite3').verbose();
-const express = require("express");
-const bodyParser = require("body-parser");
-const logger = require("morgan");
+const sqlite3 = require('sqlite3');
+//const express = require("express");
+//const bodyParser = require("body-parser");
+//import sqlite from 'sqlite3';
+//var poc_list = get_poc(populate_poc_list);
 
-var poc_list = get_poc(populate_poc_list);
+//function print_poc_list(){
+  //console.log(poc_list);
+//}
 
-function print_poc_list(){
-  console.log(poc_list);
-}
-
+/**
 function populate_poc_list(list){
   var poc = []
-  for(i = 0; i < list.length; i++){
+  for(let i = 0; i < list.length; i++){
     poc.push(list[i]);
   }
 
@@ -75,3 +75,4 @@ function insert_hub(site_name, site_city){
     console.log('Close the database connection.');
   });
 }
+**/
